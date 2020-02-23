@@ -19,7 +19,11 @@ export default {
     methods: {
         goTo(route){
             this.$store.commit('closeNav');
-            this.$router.push(route);
+
+            if(route !== this.$route.path){
+                this.$router.push(route);
+            }
+
         }
     }
 }

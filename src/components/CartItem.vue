@@ -22,7 +22,12 @@ export default {
             this.item.quantity++;
         },
         decrese(){
-            this.item.quantity--;
+            if(this.item.quantity > 1){
+                this.item.quantity--;
+            } else {
+                this.$store.commit('removeItem', this.item.id)
+            }
+
         }
     },
     computed: {

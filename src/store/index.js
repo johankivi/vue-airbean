@@ -21,23 +21,23 @@ export default new Vuex.Store({
   },
   mutations: {
     closeNav(state) {
-      console.log(state.showNav)
       state.showNav = !state.showNav;
     },
     updateItem(state, id){
-      // If 0 = remove
-      let index = state.cart.findIndex(item => item.id === id)
+      let index = state.cart.findIndex(item => item.id === id)      
       state.cart[index].quantity++;
     },
+    removeItem(state, id){
+      let index = state.cart.findIndex(item => item.id === id)      
+      state.cart.splice(index, 1);
+    },
     addItem(state, item){
-
       state.cart.push({
         id: item.id,
         price: item.price,
         title: item.title,
         quantity: 1
       });
-
     },
     emptyCart(state){
       state.cart = [];
@@ -48,10 +48,8 @@ export default new Vuex.Store({
   },
   actions: {
     addItem(ctx, item){
-      console.log('Adding items');
-
       let exists = ctx.state.cart.filter(x => x.id === item.id);
-      console.log(exists)
+
       if(exists.length > 0){
         ctx.commit('updateItem', exists[0].id)
       } else {
@@ -76,7 +74,6 @@ export default new Vuex.Store({
         }, 300)
 
       });
-      console.log(resp);
 
       ctx.commit('orderStatus', resp);
 
