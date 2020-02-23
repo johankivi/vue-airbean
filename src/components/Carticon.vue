@@ -1,6 +1,6 @@
 <template>
   <aside id="carticon">
-    <aside class="badge">{{ cartLength }}</aside>
+    <aside class="badge" :class="{ pow : pow }">{{ cartLength }}</aside>
     <img src="./../assets/graphics/bag.svg" alt="cart" @click="showCart = !showCart">
     <transition name="fade">
       <Cart v-if="showCart" />
@@ -18,7 +18,8 @@ export default {
   },
   data(){
     return {
-      showCart: false
+      showCart: false,
+      pow: false
     }
   },
   computed: {
@@ -32,6 +33,15 @@ export default {
       });
 
       return total;
+    }
+  },
+  watch: {
+    cartLength(){
+      this.pow = true;
+
+      setTimeout(() => {
+        this.pow = false
+      }, 200);
     }
   }
 }
@@ -63,7 +73,17 @@ export default {
     align-items: center;
     border-radius: 999rem;
     background: $orange;
-    font-size: .8rem;
+    font-size: .7rem;
+    font-weight: 700;
+
+    &.pow {
+      animation: pow .2s ease;
+    }
+
+    @keyframes pow {
+      from { transform: scale(1.4); opacity: .8; }
+        to { transform: scale(1); opacity: 1; }
+    }
   }
 }
 </style>

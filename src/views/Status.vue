@@ -1,9 +1,10 @@
 <template>
   <main id="status">
-    <p class="order">Ditt ordernummer är <b>#{{order.orderNr}}</b>.</p>
+    <p class="order" v-if="order.orderNr">Ditt ordernummer är <b>#{{order.orderNr}}</b>.</p>
     <img src="./../assets/graphics/drone.svg" alt="Drone">
-    <h1>Din beställning är på väg!</h1>
-    <p class="eta">ETA {{ order.ETA }} min</p>
+    <h1 v-if="order.orderNr">Din beställning är på väg!</h1>
+    <h1 v-if="!order.orderNr">Här ser du din kaffebeställning!</h1>
+    <p class="eta" v-if="order.orderNr">ETA {{ order.ETA }} min</p>
     <a href="#" class="btn" @click="$router.push('/menu')">Ok, cool!</a>
   </main>
 </template>
@@ -25,6 +26,10 @@ export default {
   background: $orange;
   color: white;
   text-align: center;
+
+  .order {
+    margin: 2rem 0;
+  }
 
   img {
     margin: 2rem 0;
@@ -57,7 +62,11 @@ export default {
     align-items: center;
     color: #222;
     border-radius: 999rem;
-    background: white;
+    background: rgba($color: #FFFFFF, $alpha: .8);
+
+    &:active {
+      background: white;
+    }
   }
 }
 </style>

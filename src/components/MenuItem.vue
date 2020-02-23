@@ -1,6 +1,6 @@
 <template>
   <article class="menu-item">
-      <aside class="add-item" @click="addItem">
+      <aside class="add-item" @click="addItem" :class="{ pow : pow }">
           <button>
               <img src="./../assets/graphics/add.svg" alt="add item">
           </button>
@@ -14,12 +14,17 @@
 export default {
   name: 'MenuItem',
   props: {
-      item: Object
+      item: Object,
+  },
+  data(){
+      return {
+        pow: false
+      }
   },
   methods: {
-      addItem(){
-          this.$store.dispatch('addItem', this.item)
-      }
+    addItem(){
+      this.$store.dispatch('addItem', this.item)
+    }
   }
 }
 </script>
@@ -55,6 +60,19 @@ export default {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                &:active {
+                    animation: pow .2s;
+                }
+
+                @keyframes pow {
+                    from { transform: scale(1.4); opacity: .8; background: $orange; }
+                      to { transform: scale(1); opacity: 1; background: $brown; }
+                }
+
+                &:focus {
+                    outline: none;
+                }
 
                 img {
                     width: 60%;

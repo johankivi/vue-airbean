@@ -15,10 +15,10 @@ export default {
 #home {
   height: 100vh;
   background-color: $green;
-  background-image: url('./../assets/graphics/intro-graphic-left.svg'), url('./../assets/graphics/intro-graphic-right.svg'); 
-  background-position: top left, top right;
-  background-size: auto 100%, auto 100%;
-  background-repeat: no-repeat, no-repeat;
+  background-image: url('./../assets/graphics/intro-graphic-left.svg'), url('./../assets/graphics/intro-graphic-right.svg') !important; 
+  background-position: top left, top right !important;
+  background-size: auto 100%, auto 100% !important;
+  background-repeat: no-repeat, no-repeat !important;
   display: flex;
   justify-content: center;
   align-items: center;

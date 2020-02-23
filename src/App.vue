@@ -3,7 +3,9 @@
     <transition name="fade">
       <Navigation v-if="showNav"/> 
     </transition>
-    <router-view/>
+    <transition name="fade">
+      <router-view/>
+    </transition>
   </div>
 </template>
 <script>

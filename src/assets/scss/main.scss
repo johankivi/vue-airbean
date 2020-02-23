@@ -39,15 +39,11 @@ p {
 
 body {
     margin: 0;
-    height: 100vh;
     font-family: 'Work Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: $pink;
-    background-image: url('./assets/graphics/graphics-header.svg'), url('./assets/graphics/graphics-footer.svg');
-    background-position: top center, bottom center;
-    background-repeat: no-repeat, no-repeat;
-    background-size: 100%, 100%;
+
 
     #app {
         max-width: 480px;
@@ -56,6 +52,10 @@ body {
         main {
             padding: 6rem 1.4rem;
             box-sizing: border-box;
+            background-image: url('./assets/graphics/graphics-header.svg'), url('./assets/graphics/graphics-footer.svg');
+            background-position: top center, bottom center;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 100%, 100%;
         }
     }
   }

@@ -104,6 +104,11 @@ export default {
         color: #eee;
         border-radius: 999rem;
         background: $brown;
+
+        &:active {
+            color: white;
+            background: black;
+        }
     }
     
 }
