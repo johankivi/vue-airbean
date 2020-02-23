@@ -72,6 +72,7 @@ export default {
         p {
             margin: 0;
             padding: 0;
+            font-weight: 700;
         }
     }
 }

@@ -1,8 +1,10 @@
 <template>
-  <aside id="carticon" @click="showCart = !showCart">
+  <aside id="carticon">
     <aside class="badge">{{ cartLength }}</aside>
-    <img src="./../assets/graphics/bag.svg" alt="cart">
-    <Cart v-if="showCart" />
+    <img src="./../assets/graphics/bag.svg" alt="cart" @click="showCart = !showCart">
+    <transition name="fade">
+      <Cart v-if="showCart" />
+    </transition>
   </aside>
 </template>
 
@@ -24,7 +26,12 @@ export default {
       return this.$store.state.cart;
     },
     cartLength(){
-      return 8;
+      let total = 0;
+      this.$store.state.cart.forEach(item => {
+          total += item.quantity;
+      });
+
+      return total;
     }
   }
 }

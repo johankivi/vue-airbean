@@ -18,7 +18,7 @@ export default {
   },
   methods: {
       addItem(){
-
+          this.$store.dispatch('addItem', this.item)
       }
   }
 }

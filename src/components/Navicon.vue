@@ -12,9 +12,7 @@ export default {
     },
     methods: {
         close(){
-            if(this.type === 'close') {
-                this.$store.commit('closeNav');
-            }
+            this.$store.commit('closeNav');
         }
     }
 }

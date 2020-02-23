@@ -1,12 +1,12 @@
 <template>
     <section id="cart">
         <h2>Din beställning</h2>
-        <CartItem v-for="(item, index) in cart.items" :key="index" :item="item" />
+        <CartItem v-for="(item, index) in cart" :key="index" :item="item" />
         <footer class="total">
             <h3>Total<span class="dots"></span>{{total}} kr</h3>
             <p>Inkl moms + drönarleverans</p>
         </footer>
-        <a href="#" class="btn">Take my money!</a>
+        <a href="#" class="btn" @click="sendOrder">I need coffee!</a>
     </section>
 </template>
 <script>
@@ -17,13 +17,19 @@ export default {
     components: {
         CartItem
     },
+    methods: {
+        sendOrder(){
+            this.$store.dispatch('sendOrder')
+            this.$router.push('/status')
+        }
+    },
     computed: {
         cart(){
             return this.$store.state.cart;
         },
         total(){
             let total = 0;
-            this.$store.state.cart.items.forEach(item => {
+            this.$store.state.cart.forEach(item => {
                 total += item.price * item.quantity;
             });
 
@@ -46,7 +52,7 @@ export default {
     background: white;
     z-index: 999;
     border-radius: .25rem;
-    box-shadow: 0 0 3rem rgba(0,0,0,.2);
+    box-shadow: 0 0 .5rem rgba(0,0,0,.2), 0 0 4rem rgba(0,0,0,.2) ;
 
     &:after {
         content: '';

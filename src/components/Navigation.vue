@@ -1,11 +1,11 @@
 <template>
     <nav id="main-nav">
         <Navicon :type="'close'"/> 
-        <router-link to="/menu">Meny</router-link>
+        <a href="#" @click="goTo('/menu')">Meny</a>
         <div class="spacer"></div>
-        <router-link to="/about">Vårt Kaffe</router-link>
+        <a href="#" @click="goTo('/about')">Vårt Kaffe</a>
         <div class="spacer"></div>
-        <router-link to="/status">Orderstatus</router-link>
+        <a href="#" @click="goTo('/status')">Orderstatus</a>
     </nav>
 </template>
 <script>
@@ -15,6 +15,12 @@ export default {
     name: 'Navigation',
     components: {
         Navicon
+    },
+    methods: {
+        goTo(route){
+            this.$store.commit('closeNav');
+            this.$router.push(route);
+        }
     }
 }
 </script>
@@ -38,8 +44,8 @@ export default {
         color: white;
         text-decoration: none;
         font-family: 'PT Serif', serif;
-        font-size: 1.8rem;
-        margin: 1rem 0;
+        font-size: 2rem;
+        margin: 2rem 0;
     }
 
     .spacer {
