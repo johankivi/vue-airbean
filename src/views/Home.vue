@@ -1,18 +1,12 @@
 <template>
   <main id="home" @click="$router.push('/menu')">
-    <Navicon :type="'navicon'" /> 
     <img src="./../assets/graphics/airbean-landing.svg" alt="Logo">
   </main>
 </template>
 
 <script>
-import Navicon from '@/components/Navicon';
-
 export default {
-  name: 'Home',
-  components: {
-        Navicon
-  },
+  name: 'Home'
 }
 </script>
 <style lang="scss">

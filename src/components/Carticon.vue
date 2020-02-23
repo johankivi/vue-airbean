@@ -55,8 +55,8 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.25rem;
+    height: 1.25rem;
     color: white;
     display: flex;
     justify-content: center;

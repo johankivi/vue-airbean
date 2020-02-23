@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Navigation v-if="showNav"/> 
+    <transition name="fade">
+      <Navigation v-if="showNav"/> 
+    </transition>
     <router-view/>
   </div>
 </template>
