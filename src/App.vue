@@ -20,6 +20,10 @@ export default {
     showNav(){
       return this.$store.state.showNav;
     }
+  },
+  beforeMount(){
+    // fetch data
+    this.$store.dispatch('getMenu')
   }
 }
 </script>

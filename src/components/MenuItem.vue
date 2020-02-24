@@ -66,8 +66,8 @@ export default {
                 }
 
                 @keyframes pow {
-                    from { transform: scale(1.4); opacity: .8; background: $orange; }
-                      to { transform: scale(1); opacity: 1; background: $brown; }
+                    from { transform: scale(1.4) rotateZ(0deg); opacity: .8; background: $orange; }
+                      to { transform: scale(1) rotateZ(180deg); opacity: 1; background: $brown; }
                 }
 
                 &:focus {

@@ -27,6 +27,9 @@ export default {
         cart(){
             return this.$store.state.cart;
         },
+        moms(){
+            return (this.total * 0.25).toFixed()*1;
+        },
         total(){
             let total = 0;
             this.$store.state.cart.forEach(item => {

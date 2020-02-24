@@ -1,9 +1,14 @@
 <template>
   <main id="status">
+    <section v-if="loading" class="loader">
+      <img src="./../assets/graphics/loader.png" alt="loading..." >
+      <p>Ditt Kaffe bryggs...</p>
+    </section>
     <p class="order" v-if="order.orderNr">Ditt ordernummer är <b>#{{order.orderNr}}</b>.</p>
-    <img src="./../assets/graphics/drone.svg" alt="Drone">
+    <img v-if="order.orderNr" src="./../assets/graphics/drone.svg" alt="Drone">
+
     <h1 v-if="order.orderNr">Din beställning är på väg!</h1>
-    <h1 v-if="!order.orderNr">Här ser du din kaffebeställning!</h1>
+    <h1 v-if="!order.orderNr && !loading">Här ser du sen din kaffebeställning!</h1>
     <p class="eta" v-if="order.orderNr">ETA {{ order.ETA }} min</p>
     <a href="#" class="btn" @click="$router.push('/menu')">Ok, cool!</a>
   </main>
@@ -14,6 +19,9 @@ export default {
   computed: {
     order(){
       return this.$store.state.activeOrder;
+    },
+    loading(){
+      return this.$store.state.loading; 
     }
   }
 }
@@ -26,9 +34,31 @@ export default {
   background: $orange;
   color: white;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .order {
     margin: 2rem 0;
+  }
+
+  .loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem 0;
+
+    img {
+      width: 4rem;
+      animation: none;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
   }
 
   img {
@@ -50,7 +80,7 @@ export default {
   }
 
   .btn {
-    display: inline-flex;
+    display: flex;
     max-width: 14rem;
     width: 100%;
     font-family: 'PT Serif', serif;

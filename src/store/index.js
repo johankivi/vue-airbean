@@ -1,22 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import Menu from './../assets/data/menu';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    activeOrder: {
-      
-    },
+    activeOrder: {},
+    loading: false,
     showNav: false,
-    menu: [
-      { id: 1, title: 'Bryggkaffe', desc: 'Bryggd på månadens bönor.', price: 39 },
-      { id: 2, title: 'Caffè Doppio', desc: 'Bryggd på månadens bönor.', price: 49 },
-      { id: 3, title: 'Cappuccino', desc: 'Bryggd på månadens bönor.', price: 49 },
-      { id: 4, title: 'Latte Macchiato', desc: 'Bryggd på månadens bönor.', price: 49 },
-      { id: 5, title: 'Kaffe Latte', desc: 'Bryggd på månadens bönor.', price: 54 },
-      { id: 6, title: 'Cortado', desc: 'Bryggd på månadens bönor.', price: 39 }
-    ],
+    menu: [],
     cart: []
   },
   mutations: {
@@ -44,6 +38,9 @@ export default new Vuex.Store({
     },
     orderStatus(state, order){
       state.activeOrder = order;
+    },
+    setMenu(state, menu){
+      state.menu = menu;
     }
   },
   actions: {
@@ -64,6 +61,9 @@ export default new Vuex.Store({
         items: ctx.state.cart
       }
 
+      // Show loader
+      ctx.state.loading = true;
+
       // POST and fake order return
       let resp = await new Promise((resolve) => {
 
@@ -71,15 +71,24 @@ export default new Vuex.Store({
           order.ETA = 13
           order.orderNr = 'SW921389B'
           resolve(order);
-        }, 300)
+        }, 2000)
 
       });
 
+      ctx.state.loading = false;
       ctx.commit('orderStatus', resp);
 
       // Empty cart
       ctx.commit('emptyCart');
 
+
+    },
+    async getMenu(ctx){
+
+      // Fake API call
+      setTimeout(() => {
+        ctx.commit('setMenu', Menu.menu )
+      }, 200)
 
     }
   },

@@ -29,6 +29,10 @@ export default {
 #menu {
   height: 100vh;
 
+  .darken {
+    background: #222;
+  }
+
   h1 {
     margin: 2rem 0 1rem 0;
   }
