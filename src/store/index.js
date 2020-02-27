@@ -61,6 +61,9 @@ export default new Vuex.Store({
         items: ctx.state.cart
       }
 
+      // remove activeOrder
+      ctx.state.activeOrder = {};
+      
       // Show loader
       ctx.state.loading = true;
 
