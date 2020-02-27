@@ -56,6 +56,8 @@ export default new Vuex.Store({
     async sendOrder(ctx){
       console.log('Sending order.')
 
+      ctx.state.activeOrder = {};
+
       let order = {
         timeStamp: Date.now(),
         items: ctx.state.cart
