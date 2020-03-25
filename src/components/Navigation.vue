@@ -5,6 +5,8 @@
         <div class="spacer"></div>
         <a href="#" @click="goTo('/about')">Vårt Kaffe</a>
         <div class="spacer"></div>
+        <a href="#" @click="goTo('/profile')">Min sida</a>
+        <div class="spacer"></div>
         <a href="#" @click="goTo('/status')">Orderstatus</a>
     </nav>
 </template>

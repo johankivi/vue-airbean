@@ -94,25 +94,6 @@ export default {
         }
 
     }
-
-    .btn {
-        display: flex;
-        font-family: 'PT Serif', serif;
-        font-size: 1.4rem;
-        text-decoration: none;
-        height: 4rem;
-        margin: 1rem 0;
-        justify-content: center;
-        align-items: center;
-        color: #eee;
-        border-radius: 999rem;
-        background: $brown;
-
-        &:active {
-            color: white;
-            background: black;
-        }
-    }
     
 }
 

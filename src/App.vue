@@ -23,7 +23,9 @@ export default {
   },
   beforeMount(){
     // fetch data
+    this.$store.dispatch('checkState')
     this.$store.dispatch('getMenu')
+
   }
 }
 </script>

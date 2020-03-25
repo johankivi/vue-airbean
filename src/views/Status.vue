@@ -9,7 +9,7 @@
 
     <h1 v-if="order.orderNr">Din beställning är på väg!</h1>
     <h1 v-if="!order.orderNr && !loading">Här ser du sen din kaffebeställning!</h1>
-    <p class="eta" v-if="order.orderNr">ETA {{ order.ETA }} min</p>
+    <p class="eta" v-if="order.orderNr">ETA {{ order.eta }} min</p>
     <a href="#" class="btn" @click="$router.push('/menu')">Ok, cool!</a>
   </main>
 </template>

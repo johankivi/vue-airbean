@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from 'axios';
 
-import Menu from './../assets/data/menu';
+const apiUrl = 'http://localhost:5000/api/beans';
 
 Vue.use(Vuex)
 
@@ -10,6 +11,11 @@ export default new Vuex.Store({
     activeOrder: {},
     loading: false,
     showNav: false,
+    profile: {
+      name: 'Sixten Kaffelovér',
+      email: 'sixten.kaffelover@zocom.se',
+      orderHistory: []
+    },
     menu: [],
     cart: []
   },
@@ -41,6 +47,9 @@ export default new Vuex.Store({
     },
     setMenu(state, menu){
       state.menu = menu;
+    },
+    updateUser(state, user){
+      state.profile = user;
     }
   },
   actions: {
@@ -56,10 +65,7 @@ export default new Vuex.Store({
     async sendOrder(ctx){
       console.log('Sending order.')
 
-      ctx.state.activeOrder = {};
-
       let order = {
-        timeStamp: Date.now(),
         items: ctx.state.cart
       }
 
@@ -69,19 +75,12 @@ export default new Vuex.Store({
       // Show loader
       ctx.state.loading = true;
 
-      // POST and fake order return
-      let resp = await new Promise((resolve) => {
+      let uuid = localStorage.getItem('airbeans');
 
-        setTimeout(() => {
-          order.ETA = 13
-          order.orderNr = 'SW921389B'
-          resolve(order);
-        }, 2000)
-
-      });
-
+      // POST and order return
+      let resp = await Axios.post(`${apiUrl}/order/${uuid}`, order)
       ctx.state.loading = false;
-      ctx.commit('orderStatus', resp);
+      ctx.commit('orderStatus', resp.data);
 
       // Empty cart
       ctx.commit('emptyCart');
@@ -90,13 +89,36 @@ export default new Vuex.Store({
     },
     async getMenu(ctx){
 
-      // Fake API call
-      setTimeout(() => {
-        ctx.commit('setMenu', Menu.menu )
-      }, 200)
+      ctx.state.loading = true;
 
+      // Fake API call
+      let resp = await Axios.get(apiUrl);
+      ctx.commit('setMenu', resp.data.menu )
+      
+      ctx.state.loading = false;
+
+    },
+    async checkState(ctx){
+      try {
+    
+        if(localStorage.getItem('airbeans') === null){
+
+          // get UUID from server
+          let uuid = await Axios.post(`${apiUrl}/key`);
+          // store in localstorage
+          localStorage.setItem('airbeans', uuid.data.key );
+
+        } else {
+
+          // Get user data
+          let profile = await Axios.get(`${apiUrl}/profile/${localStorage.getItem('airbeans')}`);
+          ctx.commit('updateUser', profile.data)
+
+        }
+
+      } catch(err){
+        console.error(err);
+      }
     }
-  },
-  modules: {
   }
 })
